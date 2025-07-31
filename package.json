@@ -1,34 +1,34 @@
 {
-  "name": "finance-app-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky",
-    "postinstall": "npx husky install",
-    "pre-commit": "lint-staged",
-    "migrations": "node src/db/postgres/migrations/exec.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@eslint/css": "^0.10.0",
-    "@eslint/js": "^9.32.0",
-    "@eslint/json": "^0.13.1",
-    "@eslint/markdown": "^7.1.0",
-    "eslint": "^9.32.0",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.3.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
-    "prettier": "^3.6.2"
-  },
-  "dependencies": {
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "pg": "^8.16.3"
-  }
+    "name": "finance-app-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prepare": "husky",
+        "postinstall": "npx husky install",
+        "pre-commit": "lint-staged",
+        "migrations": "node src/db/postgres/migrations/exec.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "@eslint/css": "^0.10.0",
+        "@eslint/js": "^9.32.0",
+        "@eslint/json": "^0.13.1",
+        "@eslint/markdown": "^7.1.0",
+        "eslint": "^9.32.0",
+        "eslint-config-prettier": "^10.1.8",
+        "globals": "^16.3.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.2",
+        "prettier": "^3.6.2"
+    },
+    "dependencies": {
+        "dotenv": "^17.2.1",
+        "express": "^5.1.0",
+        "pg": "^8.16.3"
+    }
 }
