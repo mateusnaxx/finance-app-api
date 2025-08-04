@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
-import { bcrypt } from 'bcrypt'
-import { postgresCreateUsersRepository } from '../repositories/postgres/create-users.js'
+import bcrypt from 'bcrypt'
+import { PostgresCreateUsersRepository } from '../repositories/postgres/create-users.js'
 
 export class CreateUserUseCase {
     async execute(createUserParams) {
@@ -20,7 +20,7 @@ export class CreateUserUseCase {
         }
 
         // chamar o repositório para criar o usuário
-        const postgresCreateUserRepository = new postgresCreateUsersRepository()
+        const postgresCreateUserRepository = new PostgresCreateUsersRepository()
 
         const createdUser = await postgresCreateUserRepository.execute(user)
 
