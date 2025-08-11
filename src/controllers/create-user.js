@@ -17,7 +17,6 @@ export class CreateUserController {
     async execute(httpRequest) {
         try {
             const params = httpRequest.body
-            console.log(params)
             const requiredFields = [
                 'first_name',
                 'last_name',
