@@ -1,6 +1,6 @@
 import { postgresHelper } from '../../db/postgres/helper.js'
 
-export class PostgresCreateUsersRepository {
+export class PostgresCreateUserRepository {
     async execute(createUserParams) {
         //create users in postgres
         const results = await postgresHelper.query(
