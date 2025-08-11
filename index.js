@@ -6,13 +6,21 @@ import {
     CreateUserController,
     DeleteUserController,
 } from './src/controllers/index.js'
+import { PostgresGetUserByIdRepository } from './src/repositories/postgres/get-user-by-id.js'
+import { GetUserByIdUseCase } from './src/use-cases/get-user-by-id.js'
+import { PostgresCreateUsersRepository } from './src/repositories/postgres/create-user.js'
+import { CreateUserUseCase } from './src/use-cases/create-user.js'
 
 const app = express()
 
 app.use(express.json())
 
 app.get('/api/users/:userId', async (req, res) => {
-    const getUserByIdController = new GetUserByIdController()
+    const getUserByIdRepository = new PostgresGetUserByIdRepository()
+
+    const getUserByIdUseCase = new GetUserByIdUseCase(getUserByIdRepository)
+
+    const getUserByIdController = new GetUserByIdController(getUserByIdUseCase)
 
     const { statusCode, body } = await getUserByIdController.execute(req)
 
@@ -20,7 +28,11 @@ app.get('/api/users/:userId', async (req, res) => {
 })
 
 app.post('/api/users', async (req, res) => {
-    const createUserController = new CreateUserController()
+    const createUserRepository = new PostgresCreateUsersRepository()
+
+    const createUserUseCase = new CreateUserUseCase(createUserRepository)
+
+    const createUserController = new CreateUserController(createUserUseCase)
 
     const { statusCode, body } = await createUserController.execute(req)
 
