@@ -2,9 +2,9 @@ import validator from 'validator'
 import { badRequest } from './http.js'
 
 export const checkIfAmountIsValid = (amount) => {
+    if (typeof amount !== 'number' || isNaN(amount)) return false
     const numericAmount = Number(amount)
-    if (isNaN(numericAmount) || numericAmount === 0 || numericAmount < 0.01)
-        return false
+    if (amount === 0 || amount < 0.01) return false
 
     const amountString = numericAmount.toFixed(2)
     const amountIsValid = validator.isCurrency(amountString, {
