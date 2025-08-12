@@ -13,7 +13,7 @@ export const EmailIsAlreadyInUseResponse = () => {
     })
 }
 
-export const notFoundResponse = () => {
+export const userNotFoundResponse = () => {
     return notFound({
         message: 'User not found',
     })
