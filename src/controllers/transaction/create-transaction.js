@@ -5,6 +5,7 @@ import {
     created,
     InvalidIdResponse,
     serverError,
+    validateRequiredFields,
 } from '../helpers/index.js'
 
 export class CreateTransactionController {
@@ -18,15 +19,13 @@ export class CreateTransactionController {
 
             const requiredFields = ['user_id', 'name', 'date', 'amount', 'type']
 
-            for (const field of requiredFields) {
-                if (
-                    !params[field] ||
-                    params[field].toString().trim().length === 0
-                ) {
-                    return badRequest({
-                        message: `Missing param: ${field}`,
-                    })
-                }
+            const { ok: requiredFieldsWereProvided, missingField } =
+                validateRequiredFields(params, requiredFields)
+
+            if (!requiredFieldsWereProvided) {
+                return badRequest({
+                    message: `The field ${missingField} is required.`,
+                })
             }
 
             const userIdIsValid = checkIfIdIsValid(params.user_id)
@@ -34,20 +33,18 @@ export class CreateTransactionController {
                 return InvalidIdResponse()
             }
 
-            if (params.amount < 0) {
+            if (params.amount <= 0) {
                 return badRequest({
                     message: 'The amount must be greater than 0',
                 })
             }
 
-            const amountIsValid = validator.isCurrency(
-                params.amount.toString(),
-                {
-                    digits_after_decimal: [2],
-                    allow_negatives: false,
-                    decimal_separator: '.',
-                },
-            )
+            const amountString = Number(params.amount).toFixed(2)
+            const amountIsValid = validator.isCurrency(amountString, {
+                digits_after_decimal: [2],
+                allow_negatives: false,
+                decimal_separator: '.',
+            })
 
             if (!amountIsValid) {
                 return badRequest({
