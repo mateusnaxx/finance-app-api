@@ -24,7 +24,7 @@ export class UpdateTransactionController {
 
             const params = httpRequest.body
 
-            const allowedFields = ['name', 'data', 'amount', 'type']
+            const allowedFields = ['name', 'date', 'amount', 'type']
             const someFieldsNotAllowed = Object.keys(params).some(
                 (fields) => !allowedFields.includes(fields),
             )
@@ -58,7 +58,7 @@ export class UpdateTransactionController {
 
             return ok(transaction)
         } catch (error) {
-            console.error('Error updating transaction:', error)
+            console.error(error)
 
             return serverError()
         }
